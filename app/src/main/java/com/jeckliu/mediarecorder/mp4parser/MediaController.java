@@ -43,9 +43,9 @@ public class MediaController {
         MediaFormat trackFormat = extractor.getTrackFormat(extractTrackIndexAudio);
         int maxBufferSize = trackFormat.getInteger(MediaFormat.KEY_MAX_INPUT_SIZE);
         if (start > 0) {
-            extractor.seekTo(start, MediaExtractor.SEEK_TO_PREVIOUS_SYNC);
+            extractor.seekTo(start, MediaExtractor.SEEK_TO_CLOSEST_SYNC);
         } else {
-            extractor.seekTo(0, MediaExtractor.SEEK_TO_PREVIOUS_SYNC);
+            extractor.seekTo(0, MediaExtractor.SEEK_TO_CLOSEST_SYNC);
         }
         ByteBuffer buffer = ByteBuffer.allocateDirect(maxBufferSize);
 
@@ -121,9 +121,9 @@ public class MediaController {
 
             extractor.selectTrack(extractTrackIndexVideo);
             if (startTime > 0) {
-                extractor.seekTo(startTime, MediaExtractor.SEEK_TO_PREVIOUS_SYNC);
+                extractor.seekTo(startTime, MediaExtractor.SEEK_TO_CLOSEST_SYNC);
             } else {
-                extractor.seekTo(0, MediaExtractor.SEEK_TO_PREVIOUS_SYNC);
+                extractor.seekTo(0, MediaExtractor.SEEK_TO_CLOSEST_SYNC);
             }
             MediaFormat inputFormat = extractor.getTrackFormat(extractTrackIndexVideo);
 
