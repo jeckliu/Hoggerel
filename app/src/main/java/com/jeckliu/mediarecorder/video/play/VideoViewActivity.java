@@ -1,4 +1,4 @@
-package com.jeckliu.mediarecorder.videoplay;
+package com.jeckliu.mediarecorder.video.play;
 
 import android.media.MediaPlayer;
 import android.os.Bundle;
@@ -21,7 +21,7 @@ public class VideoViewActivity extends FragmentActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,WindowManager.LayoutParams.FLAG_FULLSCREEN);
-        setContentView(R.layout.activity_videoview);
+        setContentView(R.layout.activity_video_play);
 
         videoUrl = getIntent().getStringExtra(VIDEO_URL);
 

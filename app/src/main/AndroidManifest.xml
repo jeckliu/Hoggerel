@@ -13,14 +13,18 @@
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".VideoRecorderActivity">
+        <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".videoplay.VideoViewActivity"/>
+
+        <activity android:name=".video.clip.VideoClipActivity"/>
+        <activity android:name=".video.record.VideoRecorderActivity"/>
+        <activity android:name=".video.play.VideoViewActivity"/>
+
     </application>
 
 </manifest>

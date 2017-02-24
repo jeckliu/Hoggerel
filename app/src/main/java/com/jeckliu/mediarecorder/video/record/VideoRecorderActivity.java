@@ -1,35 +1,31 @@
-package com.jeckliu.mediarecorder;
+package com.jeckliu.mediarecorder.video.record;
 
 import android.Manifest;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.hardware.Camera;
 import android.media.CamcorderProfile;
-import android.media.MediaCodec;
 import android.media.MediaRecorder;
+import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.FragmentActivity;
-import android.os.Bundle;
 import android.util.Log;
-import android.view.SurfaceHolder;
-import android.view.SurfaceView;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.FrameLayout;
 import android.widget.TextView;
 import android.widget.Toast;
-import android.widget.VideoView;
-
-import com.jeckliu.mediarecorder.videoplay.VideoViewActivity;
-
-import org.w3c.dom.Text;
+import com.jeckliu.mediarecorder.R;
+import com.jeckliu.mediarecorder.util.FileUtils;
+import com.jeckliu.mediarecorder.video.play.VideoViewActivity;
 
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+
 /***
  * Created by Jeck.Liu on 2017/1/19 0019.
  */
@@ -260,6 +256,21 @@ public class VideoRecorderActivity extends FragmentActivity implements View.OnCl
     }
 
     private void checkPermission(){
+//        permissionAction.addPermission(Manifest.permission.CAMERA)
+//                .addPermission(Manifest.permission.RECORD_AUDIO)
+//                .addPermission(Manifest.permission.WRITE_EXTERNAL_STORAGE)
+//                .requestPermission(new IPermission() {
+//                    @Override
+//                    public void done() {
+//                        initCamera();
+//                    }
+//
+//                    @Override
+//                    public void unpermission() {
+//                        Toast.makeText(VideoRecorderActivity.this, "有权限未打开", Toast.LENGTH_SHORT).show();
+//                    }
+//                });
+
         for(String permission : permissions){
             if(ActivityCompat.checkSelfPermission(this,permission) != PackageManager.PERMISSION_GRANTED){
                 grantedPermission.add(permission);
@@ -268,9 +279,10 @@ public class VideoRecorderActivity extends FragmentActivity implements View.OnCl
         if(grantedPermission.size() == 0){
             initCamera();
         }else{
+            List<String> tempList = grantedPermission;
             int i = grantedPermission.size();
             while (i != 0){
-                ActivityCompat.requestPermissions(this,new String[]{grantedPermission.get(i-1)},(int)Math.random());
+                ActivityCompat.requestPermissions(this,new String[]{tempList.get(i-1)},(int)Math.random());
                 i--;
                 grantedPermission.remove(i);
             }

@@ -1,8 +1,7 @@
-package com.jeckliu.mediarecorder;
+package com.jeckliu.mediarecorder.video.record;
 
 import android.content.Context;
 import android.hardware.Camera;
-import android.media.CamcorderProfile;
 import android.util.Log;
 import android.view.MotionEvent;
 import android.view.SurfaceHolder;

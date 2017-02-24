@@ -1,4 +1,4 @@
-package com.jeckliu.mediarecorder.videoplay;
+package com.jeckliu.mediarecorder.video.play;
 
 import android.content.Context;
 import android.util.AttributeSet;
