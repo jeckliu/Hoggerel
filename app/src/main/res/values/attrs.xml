@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="BothwaySeekBar">
+        <attr name="barBg" format="color"/>
+        <attr name="progressBg" format="color"/>
+        <attr name="thumbRightColor" format="color"/>
+        <attr name="thumbLeftColor" format="color"/>
+        <attr name="thumbRadius" format="dimension"/>
+        <attr name="barHeight" format="dimension"/>
+        <attr name="seekLeftProgress" format="integer"/>
+        <attr name="seekRightProgress" format="integer"/>
+        <attr name="seekTotalProgress" format="integer"/>
+    </declare-styleable>
+</resources>
