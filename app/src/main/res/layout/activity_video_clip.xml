@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
@@ -36,33 +37,47 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/title_bar" />
 
-    <LinearLayout
-        android:layout_width="match_parent"
+    <TextView
+        android:id="@+id/total_time"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/name"
-        android:orientation="horizontal">
+        android:layout_margin="10dp" />
 
-        <TextView
-            android:id="@+id/compress"
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/total_time"
+        android:id="@+id/both_way_seek_bar_">
+
+        <com.jeckliu.mediarecorder.view.BothwaySeekBar
+            android:id="@+id/both_way_seek_bar"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="压缩"
-            android:textSize="25sp" />
+            app:barBg="@color/green"
+            app:barHeight="3dp"
+            app:progressBg="@color/red"
+            app:seekLeftProgress="0"
+            app:seekRightProgress="100"
+            app:seekTotalProgress="100"
+            app:thumbLeftColor="@color/blue"
+            app:thumbRadius="10sp"
+            app:thumbRightColor="@color/blue" />
     </LinearLayout>
 
-    <TextureView
-        android:id="@+id/texture_view"
-        android:layout_height="200dp"
-        android:layout_width="match_parent"
-        android:layout_centerInParent="true"/>
-
+    <TextView
+        android:id="@+id/show_progress"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/both_way_seek_bar_"
+        android:layout_margin="10dp" />
 
     <VideoView
         android:id="@+id/video_view"
         android:layout_width="match_parent"
         android:layout_height="200dp"
         android:layout_centerInParent="true"
-        android:visibility="gone" />
+        android:visibility="visible" />
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/recycler_view"
@@ -70,14 +85,14 @@
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:background="#60000000"
-        android:visibility="gone" />
+        android:visibility="visible" />
 
     <ProgressBar
+        android:id="@+id/progressBar"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/progressBar"
-        android:visibility="invisible"
-        android:layout_centerInParent="true" />
+        android:layout_centerInParent="true"
+        android:visibility="gone" />
 
 
 </RelativeLayout>

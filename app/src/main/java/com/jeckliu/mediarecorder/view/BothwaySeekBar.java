@@ -6,6 +6,7 @@ import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.util.AttributeSet;
+import android.view.MotionEvent;
 import android.view.View;
 import com.jeckliu.mediarecorder.R;
 
@@ -15,6 +16,7 @@ import com.jeckliu.mediarecorder.R;
  */
 public class BothwaySeekBar extends View{
 
+    private OnSeekBarChangeListener onSeekBarChangeListener;
     private int width;
     private int height;
     private int barBg;
@@ -26,8 +28,12 @@ public class BothwaySeekBar extends View{
     private int seekLeftProgress;
     private int seekRightProgress;
     private int seekTotalProgress;
-    private int thumbLeftLocation;
-    private int thumbRightLoaction;
+    private float thumbLeftLocation;
+    private float thumbRightLocation;
+    private float rateLocation;
+
+    private boolean thumbLeftTouch;
+    private boolean thumbRightTouch;
 
     private Paint thumbLeftPaint;
     private Paint thumbRightPaint;
@@ -89,10 +95,11 @@ public class BothwaySeekBar extends View{
         thumbRightPaint = createPaint(thumbRightColor,1);
     }
 
-
-
     private Paint createPaint(int color,float width){
-        Paint paint = new Paint(Paint.ANTI_ALIAS_FLAG);
+        Paint paint = new Paint();
+        paint.setAntiAlias(true);
+        paint.setDither(true);
+        paint.setStyle(Paint.Style.FILL);
         paint.setColor(color);
         paint.setStrokeWidth(width);
         return paint;
@@ -101,10 +108,10 @@ public class BothwaySeekBar extends View{
     @Override
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
-        canvas.drawLine(0,0,width,0,barPaint);
-        canvas.drawLine(thumbLeftLocation,0,thumbRightLoaction,0,progressPaint);
-        canvas.drawCircle(thumbLeftLocation,0,thumbRadius,thumbLeftPaint);
-        canvas.drawCircle(thumbRightLoaction,0,thumbRadius,thumbRightPaint);
+        canvas.drawLine(0,thumbRadius,width,thumbRadius,barPaint);
+        canvas.drawLine(thumbLeftLocation,thumbRadius,thumbRightLocation,thumbRadius,progressPaint);
+        canvas.drawCircle(thumbLeftLocation,thumbRadius,thumbRadius,thumbLeftPaint);
+        canvas.drawCircle(thumbRightLocation,thumbRadius,thumbRadius,thumbRightPaint);
     }
 
     @Override
@@ -115,25 +122,97 @@ public class BothwaySeekBar extends View{
         int widthSize = MeasureSpec.getSize(widthMeasureSpec);
         int heightSize = MeasureSpec.getSize(heightMeasureSpec);
 
-        if(widthMode == MeasureSpec.EXACTLY){
-            width = widthSize;
-        }else{
-            width = widthSize;
-        }
+        width = widthSize;
 
         if(heightMode == MeasureSpec.EXACTLY){
             height = heightSize;
         }else{
-            height = heightSize;
+            height = (int) (2 * (thumbRadius + thumbLeftPaint.getStrokeWidth()));
+       }
+        progressToLocation();
+        if(onSeekBarChangeListener != null){
+            onSeekBarChangeListener.onProgressChanged(thumbLeftTouch,thumbRightTouch,seekLeftProgress,seekRightProgress,thumbLeftLocation,thumbRightLocation);
         }
-        calculateLocation();
         setMeasuredDimension(width,height);
     }
 
-    private void calculateLocation() {
-        double rate = width * 1.0 / seekTotalProgress;
-        thumbLeftLocation = (int) (seekLeftProgress * rate );
-        thumbRightLoaction = (int) (seekRightProgress * rate );
+    @Override
+    protected void onSizeChanged(int w, int h, int oldw, int oldh) {
+        super.onSizeChanged(w, h, oldw, oldh);
+        width = w;
+        height = h;
+        progressToLocation();
+        if(onSeekBarChangeListener != null){
+            onSeekBarChangeListener.onProgressChanged(thumbLeftTouch,thumbRightTouch,seekLeftProgress,seekRightProgress,thumbLeftLocation,thumbRightLocation);
+        }
+
     }
 
+    private void progressToLocation() {
+        rateLocation = (width ) * 1.0f / seekTotalProgress;
+        thumbLeftLocation = seekLeftProgress * rateLocation;
+        thumbRightLocation = seekRightProgress * rateLocation;
+    }
+
+    private void locationToProgress(){
+        float rate = seekTotalProgress * 1.0f / (width );
+        seekLeftProgress = (int) ((thumbLeftLocation ) * rate);
+        seekRightProgress = (int) ((thumbRightLocation ) * rate + 0.5);
+    }
+
+    @Override
+    public boolean onTouchEvent(MotionEvent event) {
+        float x = event.getX();
+        switch (event.getAction()){
+            case MotionEvent.ACTION_DOWN:
+                if(x <= (thumbLeftLocation + thumbRadius) && x >= (thumbLeftLocation -thumbRadius)){
+                    thumbLeftTouch = true;
+                }else{
+                    thumbLeftTouch = false;
+                }
+                if(x <= (thumbRightLocation + thumbRadius) && x >= (thumbRightLocation -thumbRadius)){
+                    thumbRightTouch = true;
+                }else{
+                    thumbRightTouch = false;
+                }
+                break;
+            case MotionEvent.ACTION_MOVE:
+                if(thumbLeftTouch && x > 0 && ((thumbRightLocation - x) > rateLocation)
+                        && x < (thumbRightLocation - 2 * thumbRadius)){
+                    thumbLeftLocation = x;
+                }
+                if(thumbRightTouch && x < width && ((x - thumbLeftLocation) > rateLocation) && x >(thumbLeftLocation + 2 * thumbRadius)){
+                    thumbRightLocation = x;
+                }
+                locationToProgress();
+                if(onSeekBarChangeListener != null){
+                    onSeekBarChangeListener.onProgressChanged(thumbLeftTouch,thumbRightTouch,seekLeftProgress,seekRightProgress,thumbLeftLocation,thumbRightLocation);
+                }
+                break;
+            case MotionEvent.ACTION_UP:
+                break;
+        }
+        invalidate();
+        return true;
+    }
+
+    public void setSeekTotalProgress(int seekTotalProgress){
+        this.seekTotalProgress = seekTotalProgress;
+    }
+
+    public void setSeekLeftProgress(int seekLeftProgress){
+        this.seekLeftProgress = seekLeftProgress;
+    }
+
+    public void setSeekRightProgress(int seekRightProgress){
+        this.seekRightProgress = seekRightProgress;
+    }
+
+    public void setOnSeekBarChangeListener(OnSeekBarChangeListener onSeekBarChangeListener){
+        this.onSeekBarChangeListener = onSeekBarChangeListener;
+    }
+
+    public interface OnSeekBarChangeListener{
+        void onProgressChanged(boolean leftTouch, boolean rightTouch, int leftProgress,int rightProgress,float leftLocation,float rightLocation);
+    }
 }
