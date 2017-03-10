@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    xmlns:apps="http://schemas.android.com/apk/res-auto">
 
     <RelativeLayout
         android:id="@+id/title_bar"
@@ -50,19 +50,16 @@
         android:layout_below="@+id/total_time"
         android:id="@+id/both_way_seek_bar_">
 
-        <com.jeckliu.mediarecorder.view.BothwaySeekBar
+        <com.jeckliu.mediarecorder.view.PictureSeekPicker
             android:id="@+id/both_way_seek_bar"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            app:barBg="@color/green"
-            app:barHeight="3dp"
-            app:progressBg="@color/red"
-            app:seekLeftProgress="0"
-            app:seekRightProgress="100"
-            app:seekTotalProgress="100"
-            app:thumbLeftColor="@color/blue"
-            app:thumbRadius="10sp"
-            app:thumbRightColor="@color/blue" />
+            apps:thumbColor="@color/blue"
+            apps:thumbHeight="100dp"
+            apps:thumbWidth="20dp"
+            apps:thumbTotalProgress="10"
+            apps:thumbLeftProgress="0"
+            apps:thumbRightProgress="10" />
     </LinearLayout>
 
     <TextView

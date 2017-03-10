@@ -31,6 +31,10 @@ public class ImageAdapter extends RecyclerView.Adapter<ImageAdapter.ViewHolder>{
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
         holder.imageView.setImageBitmap(bitmaps.get(position));
+        int[] locations = new int[2];
+        float x = holder.imageView.getX();
+        float y = holder.imageView.getY();
+        System.out.println("onBindViewHolder-----"+ x +","+ y);
     }
 
     @Override
@@ -47,6 +51,10 @@ public class ImageAdapter extends RecyclerView.Adapter<ImageAdapter.ViewHolder>{
 
         private void initView(View itemView) {
             imageView = (ImageView) itemView.findViewById(R.id.image_view);
+            int[] locations = new int[2];
+            float x = imageView.getX();
+            float y = imageView.getY();
+            System.out.println("onCreateViewHolder-----"+ x +","+ y);
         }
     }
 }

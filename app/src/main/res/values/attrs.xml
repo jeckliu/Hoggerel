@@ -11,4 +11,15 @@
         <attr name="seekRightProgress" format="integer"/>
         <attr name="seekTotalProgress" format="integer"/>
     </declare-styleable>
+
+    <declare-styleable name="PictureSeekPicker">
+        <attr name="lineColor" format="color"/>
+        <attr name="thumbColor" format="color"/>
+        <attr name="thumbWidth" format="dimension"/>
+        <attr name="thumbHeight" format="dimension"/>
+        <attr name="thumbLeftProgress" format="integer"/>
+        <attr name="thumbRightProgress" format="integer"/>
+        <attr name="thumbTotalProgress" format="integer"/>
+    </declare-styleable>
+
 </resources>

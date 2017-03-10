@@ -24,7 +24,7 @@ import com.jeckliu.mediarecorder.R;
 import com.jeckliu.mediarecorder.mp4parser.MediaController;
 import com.jeckliu.mediarecorder.util.FileUtils;
 import com.jeckliu.mediarecorder.util.VideoUtil;
-import com.jeckliu.mediarecorder.view.BothwaySeekBar;
+import com.jeckliu.mediarecorder.view.PictureSeekPicker;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -42,7 +42,7 @@ public class VideoClipActivity extends FragmentActivity implements View.OnClickL
     private VideoView videoView;
     private RecyclerView recyclerView;
     private ProgressBar progressBar;
-    private BothwaySeekBar bothwaySeekBar;
+    private PictureSeekPicker bothwaySeekBar;
     private TextView tvShowProgress;
 
     private String path;
@@ -80,19 +80,19 @@ public class VideoClipActivity extends FragmentActivity implements View.OnClickL
         videoView = (VideoView) findViewById(R.id.video_view);
         recyclerView = (RecyclerView) findViewById(R.id.recycler_view);
         progressBar = (ProgressBar) findViewById(R.id.progressBar);
-        bothwaySeekBar = (BothwaySeekBar) findViewById(R.id.both_way_seek_bar);
+        bothwaySeekBar = (PictureSeekPicker) findViewById(R.id.both_way_seek_bar);
         tvShowProgress = (TextView) findViewById(R.id.show_progress);
-        bothwaySeekBar.setOnSeekBarChangeListener(new BothwaySeekBar.OnSeekBarChangeListener() {
+        bothwaySeekBar.setOnSeekBarChangeListener(new PictureSeekPicker.OnSeekBarChangeListener() {
             @Override
-            public void onProgressChanged(boolean leftTouch, boolean rightTouch, int leftProgress, int rightProgress, float leftLocation, float rightLocation) {
-                tvShowProgress.setText("进度"+leftProgress+"，位置"+leftLocation+"，进度"+rightProgress+"，位置"+rightLocation);
-                if(leftTouch){
+            public void onProgressChanged(int leftProgress, int rightProgress) {
+                tvShowProgress.setText("进度"+leftProgress+"，进度"+rightProgress);
+                if(startPosition != leftProgress){
                     startPosition = leftProgress;
                     videoView.seekTo(leftProgress);
                     videoView.start();
                     handler.sendEmptyMessage(0);
                 }
-                if(rightTouch){
+                if(endPosition != rightProgress){
                     endPosition = rightProgress;
                 }
             }
@@ -133,9 +133,9 @@ public class VideoClipActivity extends FragmentActivity implements View.OnClickL
             @Override
             public void onPrepared(MediaPlayer mp) {
                 int duration = videoView.getDuration();
-                bothwaySeekBar.setSeekTotalProgress(duration);
-                bothwaySeekBar.setSeekLeftProgress(0);
-                bothwaySeekBar.setSeekRightProgress(duration);
+                bothwaySeekBar.setThumbTotalProgress(duration);
+                bothwaySeekBar.setThumbLeftProgress(0);
+                bothwaySeekBar.setThumbRightProgress(duration);
                 startPosition = 0;
                 endPosition = duration;
                 tvShowTotalTime.setText("视频总时长:"+ duration + "毫秒");

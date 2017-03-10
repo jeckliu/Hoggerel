@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:apps="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -9,26 +9,25 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content">
 
-        <com.jeckliu.mediarecorder.view.BothwaySeekBar
+        <com.jeckliu.mediarecorder.view.PictureSeekPicker
             android:id="@+id/both_way_seek_bar"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="100dp"
-            apps:barBg="@color/green"
-            apps:barHeight="2dp"
-            apps:progressBg="@color/red"
-            apps:seekLeftProgress="5"
-            apps:seekRightProgress="6"
-            apps:seekTotalProgress="13"
-            apps:thumbLeftColor="@color/blue"
-            apps:thumbRadius="10dp"
-            apps:thumbRightColor="@color/blue" />
+            apps:lineColor="@color/green"
+            apps:thumbColor="@color/blue"
+            apps:thumbHeight="100dp"
+            apps:thumbWidth="20dp"
+            apps:thumbTotalProgress="10"
+            apps:thumbLeftProgress="3"
+            apps:thumbRightProgress="7"/>
     </LinearLayout>
 
     <TextView
         android:id="@+id/activity_test_show"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
         android:text="123" />
 
-</RelativeLayout>
+</LinearLayout>
