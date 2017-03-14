@@ -168,7 +168,7 @@ public class PictureSeekPicker extends View{
             height = heightSize;
         }else{
             height = (int) (thumbHeight + 2 * linePaint.getStrokeWidth());
-       }
+        }
         progressToLocation();
         setMeasuredDimension(width,height);
     }

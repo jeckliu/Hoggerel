@@ -14,25 +14,25 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.FragmentActivity;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.VideoView;
+
 import com.jeckliu.mediarecorder.R;
 import com.jeckliu.mediarecorder.mp4parser.MediaController;
 import com.jeckliu.mediarecorder.util.FileUtils;
 import com.jeckliu.mediarecorder.util.VideoUtil;
-import com.jeckliu.mediarecorder.view.PictureSeekPicker;
+import com.jeckliu.mediarecorder.view.PictureSeekPickerHelper;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
 /***
  * Created by Jeck.Liu on 2017/2/13 0013.
  */
-public class VideoClipActivity extends FragmentActivity implements View.OnClickListener{
+public class VideoClipActivity extends FragmentActivity implements View.OnClickListener {
     private String[] permissions = new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE};
     private List<String> grantedPermission = new ArrayList<>();
 
@@ -40,30 +40,33 @@ public class VideoClipActivity extends FragmentActivity implements View.OnClickL
     private TextView tvName;
     private TextView tvShowTotalTime;
     private VideoView videoView;
-    private RecyclerView recyclerView;
     private ProgressBar progressBar;
-    private PictureSeekPicker bothwaySeekBar;
     private TextView tvShowProgress;
+    private PictureSeekPickerHelper pictureSeekPickerHelper;
 
     private String path;
+    private int startPosition = 1;
+    private int endPosition = 10;
 
-    private int startPosition;
-    private int endPosition;
-
-    private Handler handler = new Handler(){
+    private Handler handler = new Handler() {
         @Override
         public void handleMessage(Message msg) {
             super.handleMessage(msg);
-            switch (msg.what){
+            switch (msg.what) {
                 case 0:
-                    if(videoView.getCurrentPosition() >= endPosition){
+                    if (videoView.getCurrentPosition() >= endPosition * 1000) {
                         videoView.pause();
                     }
-                    if(!videoView.isPlaying()){
-                        videoView.seekTo(startPosition);
+                    if (!videoView.isPlaying()) {
+                        videoView.seekTo(startPosition * 1000);
                         videoView.start();
                     }
-                    handler.sendEmptyMessageDelayed(0,1000);
+                    handler.sendEmptyMessageDelayed(0, 100);
+                    break;
+                case 1:
+                    Bundle bundle = msg.getData();
+                    ArrayList<Bitmap> bitmaps = (ArrayList<Bitmap>) bundle.getSerializable("bitmaps");
+                    pictureSeekPickerHelper.setBitmaps(bitmaps);
                     break;
             }
         }
@@ -78,35 +81,18 @@ public class VideoClipActivity extends FragmentActivity implements View.OnClickL
         tvName = (TextView) findViewById(R.id.name);
         tvShowTotalTime = (TextView) findViewById(R.id.total_time);
         videoView = (VideoView) findViewById(R.id.video_view);
-        recyclerView = (RecyclerView) findViewById(R.id.recycler_view);
         progressBar = (ProgressBar) findViewById(R.id.progressBar);
-        bothwaySeekBar = (PictureSeekPicker) findViewById(R.id.both_way_seek_bar);
         tvShowProgress = (TextView) findViewById(R.id.show_progress);
-        bothwaySeekBar.setOnSeekBarChangeListener(new PictureSeekPicker.OnSeekBarChangeListener() {
-            @Override
-            public void onProgressChanged(int leftProgress, int rightProgress) {
-                tvShowProgress.setText("进度"+leftProgress+"，进度"+rightProgress);
-                if(startPosition != leftProgress){
-                    startPosition = leftProgress;
-                    videoView.seekTo(leftProgress);
-                    videoView.start();
-                    handler.sendEmptyMessage(0);
-                }
-                if(endPosition != rightProgress){
-                    endPosition = rightProgress;
-                }
-            }
-        });
-
+        pictureSeekPickerHelper = PictureSeekPickerHelper.getInstance(this);
         checkPermission();
     }
 
     private void initData() {
-        if(FileUtils.getInputVideoFiles() != null && FileUtils.getInputVideoFiles().size() > 0){
+        if (FileUtils.getInputVideoFiles() != null && FileUtils.getInputVideoFiles().size() > 0) {
             path = FileUtils.getInputVideoFiles().get(0);
             tvName.setText(path);
         }
-        if(path == null){
+        if (path == null) {
             return;
         }
 
@@ -115,12 +101,31 @@ public class VideoClipActivity extends FragmentActivity implements View.OnClickL
         bitmapFromClipVideo(path);
     }
 
-    private void bitmapFromClipVideo(String path) {
-        VideoUtil.getInstance().init(path);
-        List<Bitmap> bitmaps = VideoUtil.getInstance().getBitmapsForVideo();
-        ImageAdapter adapter = new ImageAdapter(this,bitmaps);
-        recyclerView.setLayoutManager(new LinearLayoutManager(this,LinearLayoutManager.HORIZONTAL,false));
-        recyclerView.setAdapter(adapter);
+    private void bitmapFromClipVideo(final String path) {
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                VideoUtil.getInstance().init(path);
+                List<Bitmap> bitmaps = VideoUtil.getInstance().getBitmapsForVideo();
+                Message msg = new Message();
+                Bundle bundle = new Bundle();
+                bundle.putSerializable("bitmaps", (Serializable) bitmaps);
+                msg.setData(bundle);
+                msg.what = 1;
+                handler.sendMessage(msg);
+            }
+        }).start();
+
+        pictureSeekPickerHelper.setOnSeekProgress(new PictureSeekPickerHelper.OnSeekProgress() {
+            @Override
+            public void setOnSeekProgress(int leftProgress, int rightProgress) {
+                videoView.seekTo(leftProgress * 1000);
+                videoView.start();
+                startPosition = leftProgress;
+                endPosition = rightProgress;
+                tvShowProgress.setText("左边===" + leftProgress + ",右边===" + rightProgress);
+            }
+        });
     }
 
     @TargetApi(Build.VERSION_CODES.JELLY_BEAN_MR1)
@@ -132,13 +137,8 @@ public class VideoClipActivity extends FragmentActivity implements View.OnClickL
         videoView.setOnPreparedListener(new MediaPlayer.OnPreparedListener() {
             @Override
             public void onPrepared(MediaPlayer mp) {
-                int duration = videoView.getDuration();
-                bothwaySeekBar.setThumbTotalProgress(duration);
-                bothwaySeekBar.setThumbLeftProgress(0);
-                bothwaySeekBar.setThumbRightProgress(duration);
-                startPosition = 0;
-                endPosition = duration;
-                tvShowTotalTime.setText("视频总时长:"+ duration + "毫秒");
+                int duration = videoView.getDuration() / 1000;
+                tvShowTotalTime.setText("视频总时长:" + duration + "秒");
                 handler.sendEmptyMessage(0);
             }
         });
@@ -147,7 +147,7 @@ public class VideoClipActivity extends FragmentActivity implements View.OnClickL
 
     @Override
     public void onClick(View v) {
-        switch (v.getId()){
+        switch (v.getId()) {
             case R.id.done:
                 new VideoCompressorTask().execute();
                 break;
@@ -164,14 +164,14 @@ public class VideoClipActivity extends FragmentActivity implements View.OnClickL
 
         @Override
         protected Boolean doInBackground(Void... voids) {
-            return MediaController.getInstance().compressVideo(path,FileUtils.getOutputFile(),2,10);
+            return MediaController.getInstance().compressVideo(path, FileUtils.getOutputFile(), startPosition - 1, endPosition);
         }
 
         @Override
         protected void onPostExecute(Boolean compressed) {
             super.onPostExecute(compressed);
             progressBar.setVisibility(View.GONE);
-            if(compressed){
+            if (compressed) {
             }
         }
     }
@@ -179,22 +179,22 @@ public class VideoClipActivity extends FragmentActivity implements View.OnClickL
 
     private void checkPermission() {
 
-            for(String permission : permissions){
-                if(ActivityCompat.checkSelfPermission(this,permission) != PackageManager.PERMISSION_GRANTED){
-                    grantedPermission.add(permission);
-                }
+        for (String permission : permissions) {
+            if (ActivityCompat.checkSelfPermission(this, permission) != PackageManager.PERMISSION_GRANTED) {
+                grantedPermission.add(permission);
             }
-            if(grantedPermission.size() == 0){
-                initData();
-            }else{
-                List<String> tempList = grantedPermission;
-                int i = grantedPermission.size();
-                while (i != 0){
-                    ActivityCompat.requestPermissions(this,new String[]{tempList.get(i-1)},(int)Math.random());
-                    i--;
-                    grantedPermission.remove(i);
-                }
+        }
+        if (grantedPermission.size() == 0) {
+            initData();
+        } else {
+            List<String> tempList = grantedPermission;
+            int i = grantedPermission.size();
+            while (i != 0) {
+                ActivityCompat.requestPermissions(this, new String[]{tempList.get(i - 1)}, (int) Math.random());
+                i--;
+                grantedPermission.remove(i);
             }
+        }
 
     }
 

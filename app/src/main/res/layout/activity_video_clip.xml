@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    xmlns:apps="http://schemas.android.com/apk/res-auto">
+    android:layout_height="match_parent">
 
     <RelativeLayout
         android:id="@+id/title_bar"
@@ -44,29 +43,11 @@
         android:layout_below="@+id/name"
         android:layout_margin="10dp" />
 
-    <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/total_time"
-        android:id="@+id/both_way_seek_bar_">
-
-        <com.jeckliu.mediarecorder.view.PictureSeekPicker
-            android:id="@+id/both_way_seek_bar"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            apps:thumbColor="@color/blue"
-            apps:thumbHeight="100dp"
-            apps:thumbWidth="20dp"
-            apps:thumbTotalProgress="10"
-            apps:thumbLeftProgress="0"
-            apps:thumbRightProgress="10" />
-    </LinearLayout>
-
     <TextView
         android:id="@+id/show_progress"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/both_way_seek_bar_"
+        android:layout_below="@+id/total_time"
         android:layout_margin="10dp" />
 
     <VideoView
@@ -76,14 +57,8 @@
         android:layout_centerInParent="true"
         android:visibility="visible" />
 
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/recycler_view"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:background="#60000000"
-        android:visibility="visible" />
-
+    <include
+        layout="@layout/item_picture_seek_picker_helper" />
     <ProgressBar
         android:id="@+id/progressBar"
         android:layout_width="wrap_content"
