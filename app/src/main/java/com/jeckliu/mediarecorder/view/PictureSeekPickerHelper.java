@@ -10,6 +10,8 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
+
 import com.jeckliu.mediarecorder.R;
 
 import java.util.ArrayList;
@@ -23,6 +25,7 @@ public class PictureSeekPickerHelper {
     private static PictureSeekPickerHelper instance;
     private OnSeekProgress onSeekProgress;
     private Activity activity;
+    private RelativeLayout rootParent;
     private RecyclerView recyclerView;
     private ImageAdapter adapter;
     private ImageView ivLeft;
@@ -53,6 +56,7 @@ public class PictureSeekPickerHelper {
     }
 
     private void initView() {
+        rootParent = (RelativeLayout) activity.findViewById(R.id.item_picture_seek_picker_helper);
         recyclerView = (RecyclerView) activity.findViewById(R.id.recycler_view);
         ivLeft = (ImageView) activity.findViewById(R.id.iv_left);
         ivRight = (ImageView) activity.findViewById(R.id.iv_right);
@@ -182,6 +186,7 @@ public class PictureSeekPickerHelper {
     }
 
     public void setBitmaps(List<Bitmap> bitmaps) {
+        rootParent.setVisibility(View.VISIBLE);
         adapter.setData(bitmaps);
     }
 
