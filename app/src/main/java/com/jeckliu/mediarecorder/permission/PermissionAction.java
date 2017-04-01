@@ -19,7 +19,7 @@ public class PermissionAction{
     private List<String> permissions = new ArrayList<>();
 
     public static PermissionAction getInstance(Context mContext){
-        activity = (Activity) context;
+        activity = (Activity) mContext;
         context = mContext;
         if(instance == null){
             instance = new PermissionAction();
@@ -30,16 +30,15 @@ public class PermissionAction{
     public void permissionResult(int requestCode, @NonNull String[] grantPermissions, @NonNull int[] grantResults){
         for(int i = 0; i < grantResults.length; i++){
             if(grantResults[i] == PackageManager.PERMISSION_GRANTED){
-                permissions.remove(i);
+                permissions.remove(grantPermissions[i]);
             }
         }
         if(permissions.size() == 0){
             iPermission.done();
         }else{
-            iPermission.unpermission();
+            iPermission.unPermission();
         }
     }
-
 
     public  PermissionAction addPermission(String permission){
         if(ActivityCompat.checkSelfPermission(context,permission) != PackageManager.PERMISSION_GRANTED){

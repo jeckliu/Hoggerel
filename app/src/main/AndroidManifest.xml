@@ -28,7 +28,7 @@
             <!--</intent-filter>-->
         </activity>
 
-
+        <activity android:name=".video.clip.VideoSelectActivity"/>
         <activity android:name=".video.clip.VideoClipActivity"/>
         <activity android:name=".video.record.VideoRecorderActivity"/>
         <activity android:name=".video.play.VideoViewActivity"/>

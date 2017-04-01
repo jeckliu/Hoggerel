@@ -33,6 +33,7 @@ import java.util.List;
  * Created by Jeck.Liu on 2017/2/13 0013.
  */
 public class VideoClipActivity extends FragmentActivity implements View.OnClickListener {
+    public static  final String SRC_PATH = "srcPath";
     private String[] permissions = new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE};
     private List<String> grantedPermission = new ArrayList<>();
 
@@ -88,13 +89,8 @@ public class VideoClipActivity extends FragmentActivity implements View.OnClickL
     }
 
     private void initData() {
-        if (FileUtils.getInputVideoFiles() != null && FileUtils.getInputVideoFiles().size() > 0) {
-            path = FileUtils.getInputVideoFiles().get(0);
-            tvName.setText(path);
-        }
-        if (path == null) {
-            return;
-        }
+        path = getIntent().getStringExtra(SRC_PATH);
+        tvName.setText(path);
 
         videoPlay(path);
 

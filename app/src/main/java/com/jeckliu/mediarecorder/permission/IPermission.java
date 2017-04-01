@@ -6,5 +6,5 @@ package com.jeckliu.mediarecorder.permission;
 public interface IPermission {
     void done();
 
-    void unpermission();
+    void unPermission();
 }
