@@ -16,8 +16,19 @@
     <TextView
         android:background="#ffff00"
         android:layout_height="50dp"
+        android:layout_marginTop="5dp"
         android:layout_width="match_parent"
-        android:layout_marginTop="2dp"
+        android:gravity="center"
+        android:text="拍摄"
+        android:onClick="onShoot"
+        android:enabled="true"/>
+
+
+    <TextView
+        android:background="#ffff00"
+        android:layout_height="50dp"
+        android:layout_width="match_parent"
+        android:layout_marginTop="5dp"
         android:gravity="center"
         android:text="本地视频剪辑"
         android:onClick="onVideoClip"

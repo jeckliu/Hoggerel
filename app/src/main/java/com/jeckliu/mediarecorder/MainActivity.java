@@ -12,6 +12,7 @@ import com.jeckliu.mediarecorder.permission.IPermission;
 import com.jeckliu.mediarecorder.video.clip.VideoClipActivity;
 import com.jeckliu.mediarecorder.video.clip.VideoSelectActivity;
 import com.jeckliu.mediarecorder.video.record.VideoRecorderActivity;
+import com.jeckliu.mediarecorder.video.shoot.ShootActivity;
 
 /***
  * Created by Jeck.Liu on 2017/2/14 0014.
@@ -41,6 +42,10 @@ public class MainActivity extends BaseActivity{
 
     public void onVideoRecord(View view){
         startActivity(new Intent(this,VideoRecorderActivity.class));
+    }
+
+    public void onShoot(View view){
+        startActivity(new Intent(this,ShootActivity.class));
     }
 
     public void onVideoClip(View view){

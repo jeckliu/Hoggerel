@@ -1,25 +1,38 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <declare-styleable name="BothwaySeekBar">
-        <attr name="barBg" format="color"/>
-        <attr name="progressBg" format="color"/>
-        <attr name="thumbRightColor" format="color"/>
-        <attr name="thumbLeftColor" format="color"/>
-        <attr name="thumbRadius" format="dimension"/>
-        <attr name="barHeight" format="dimension"/>
-        <attr name="seekLeftProgress" format="integer"/>
-        <attr name="seekRightProgress" format="integer"/>
-        <attr name="seekTotalProgress" format="integer"/>
+        <attr name="barBg" format="color" />
+        <attr name="progressBg" format="color" />
+        <attr name="thumbRightColor" format="color" />
+        <attr name="thumbLeftColor" format="color" />
+        <attr name="thumbRadius" format="dimension" />
+        <attr name="barHeight" format="dimension" />
+        <attr name="seekLeftProgress" format="integer" />
+        <attr name="seekRightProgress" format="integer" />
+        <attr name="seekTotalProgress" format="integer" />
     </declare-styleable>
 
     <declare-styleable name="PictureSeekPicker">
-        <attr name="lineColor" format="color"/>
-        <attr name="thumbColor" format="color"/>
-        <attr name="thumbWidth" format="dimension"/>
-        <attr name="thumbHeight" format="dimension"/>
-        <attr name="thumbLeftProgress" format="integer"/>
-        <attr name="thumbRightProgress" format="integer"/>
-        <attr name="thumbTotalProgress" format="integer"/>
+        <attr name="lineColor" format="color" />
+        <attr name="thumbColor" format="color" />
+        <attr name="thumbWidth" format="dimension" />
+        <attr name="thumbHeight" format="dimension" />
+        <attr name="thumbLeftProgress" format="integer" />
+        <attr name="thumbRightProgress" format="integer" />
+        <attr name="thumbTotalProgress" format="integer" />
     </declare-styleable>
+
+    <declare-styleable name="ShootIconView">
+        <attr name="outerPaintColor" format="color"/>
+        <attr name="outerProgressPaintColor" format="color"/>
+        <attr name="innerPaintColor" format="color"/>
+        <attr name="outerOriginalRadius" format="dimension"/>
+        <attr name="innerOriginalRadius" format="dimension"/>
+        <attr name="outerScaleRadius" format="dimension"/>
+        <attr name="innerScaleRadius" format="dimension"/>
+        <attr name="progressWidth" format="dimension"/>
+        <attr name="shootMaxTime" format="integer"/>
+        <attr name="shootMinTime" format="integer"/>
+     </declare-styleable>
 
 </resources>

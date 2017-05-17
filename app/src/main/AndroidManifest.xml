@@ -32,6 +32,8 @@
         <activity android:name=".video.clip.VideoClipActivity"/>
         <activity android:name=".video.record.VideoRecorderActivity"/>
         <activity android:name=".video.play.VideoViewActivity"/>
+        <activity android:name=".video.shoot.ShootActivity"
+            android:screenOrientation="portrait"/>
 
     </application>
 
