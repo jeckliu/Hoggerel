@@ -23,6 +23,15 @@
         android:onClick="onShoot"
         android:enabled="true"/>
 
+    <TextView
+        android:background="#ffff00"
+        android:layout_height="50dp"
+        android:layout_marginTop="5dp"
+        android:layout_width="match_parent"
+        android:gravity="center"
+        android:text="拍摄(体验更好)"
+        android:onClick="onShoot2"
+        android:enabled="true"/>
 
     <TextView
         android:background="#ffff00"

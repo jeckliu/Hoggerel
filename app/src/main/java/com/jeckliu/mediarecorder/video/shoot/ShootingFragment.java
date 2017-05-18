@@ -24,7 +24,7 @@ import java.io.IOException;
 /***
  * Created by Jeck.Liu on 2017/5/15 0015.
  */
-public class ShootingFragment extends Fragment implements ShootIconView.OnCallBackListener {
+public class ShootingFragment extends Fragment implements ShootIconView.OnCallbackListener {
     private FragmentManager manager;
     private FrameLayout preview;
     private CameraPreview cameraPreview;
@@ -66,7 +66,7 @@ public class ShootingFragment extends Fragment implements ShootIconView.OnCallBa
         initCamera();
         cameraPreview = new CameraPreview(getContext(), camera,cameraFacing);
         preview.addView(cameraPreview);
-        shootIconView.setOnCallBackListener(this);
+        shootIconView.setOnCallbackListener(this);
         manager = getActivity().getSupportFragmentManager();
 
         ivSwitchCamera.setOnClickListener(new View.OnClickListener() {

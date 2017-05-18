@@ -37,7 +37,7 @@ public class ShootIconView extends View {
     private float progressWidth;
     private long shootMaxTime;
     private long pressDownTime;
-    private OnCallBackListener onCallBackListener;
+    private OnCallbackListener onCallbackListener;
     private boolean isStopDraw;
     private boolean isExpanded;
     private long shootTime;
@@ -131,15 +131,13 @@ public class ShootIconView extends View {
                 if (!isStopDraw) {
                     isStopDraw = true;
                     if (shootTime <= 0) {
-                        if (onCallBackListener != null) {
-                            onCallBackListener.onTakePhoto();
+                        if (onCallbackListener != null) {
+                            onCallbackListener.onTakePhoto();
                         }
-                        Toast.makeText(getContext(), "拍照", Toast.LENGTH_SHORT).show();
                     } else {
-                        if (onCallBackListener != null) {
-                            onCallBackListener.onStopRecordVideo(shootTime);
+                        if (onCallbackListener != null) {
+                            onCallbackListener.onStopRecordVideo(shootTime);
                         }
-                        Toast.makeText(getContext(), "结束摄像" + shootTime, Toast.LENGTH_SHORT).show();
                     }
                 }
                 break;
@@ -185,11 +183,11 @@ public class ShootIconView extends View {
         postInvalidate();
     }
 
-    public void setOnCallBackListener(OnCallBackListener onCallBackListener) {
-        this.onCallBackListener = onCallBackListener;
+    public void setOnCallbackListener(OnCallbackListener onCallbackListener) {
+        this.onCallbackListener = onCallbackListener;
     }
 
-    public interface OnCallBackListener {
+    public interface OnCallbackListener {
         void onTakePhoto();
 
         void onStartRecordVideo();
@@ -211,16 +209,16 @@ public class ShootIconView extends View {
                         arc = new RectF(centerX - outerDrawRadius, centerY - outerDrawRadius,
                                 centerX + outerDrawRadius, centerY + outerDrawRadius);
                         isExpanded = true;
-                        if (onCallBackListener != null) {
-                            onCallBackListener.onStartRecordVideo();
+                        if (onCallbackListener != null) {
+                            onCallbackListener.onStartRecordVideo();
                         }
                     }
                     postInvalidate();
                 }
                 if (shootTime >= shootMaxTime) {
                     isStopDraw = true;
-                    if (onCallBackListener != null) {
-                        onCallBackListener.onStopRecordVideo(shootTime);
+                    if (onCallbackListener != null) {
+                        onCallbackListener.onStopRecordVideo(shootTime);
                     }
                 }
                 try {

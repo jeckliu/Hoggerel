@@ -4,15 +4,10 @@ import android.annotation.TargetApi;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentTransaction;
 import android.view.WindowManager;
 
 import com.jeckliu.mediarecorder.R;
-
-import java.io.Serializable;
 
 /***
  * Created by Jeck.Liu on 2017/5/12 0012.
@@ -31,7 +26,7 @@ public class ShootActivity extends FragmentActivity {
         super.onCreate(savedInstanceState);
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN);
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_NAVIGATION);
-        setContentView(R.layout.activity_shoot);
+        setContentView(R.layout.activity_shoot2);
 
         getSupportFragmentManager().beginTransaction().replace(R.id.fragment, new ShootingFragment()).commit();
 
