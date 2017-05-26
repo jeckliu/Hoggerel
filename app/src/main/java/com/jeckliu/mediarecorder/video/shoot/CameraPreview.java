@@ -124,6 +124,10 @@ public class CameraPreview extends SurfaceView implements SurfaceHolder.Callback
         @Override
         public void onAutoFocus(boolean success, Camera camera) {
             if (success) {
+                Camera.Parameters parameters = mCamera.getParameters();
+                parameters.setFocusMode(Camera.Parameters.FOCUS_MODE_CONTINUOUS_PICTURE);
+                mCamera.setParameters(parameters);
+                mCamera.autoFocus(autoFocusCallback);
                 camera.cancelAutoFocus();
             }
         }
@@ -166,8 +170,12 @@ public class CameraPreview extends SurfaceView implements SurfaceHolder.Callback
     public boolean onTouchEvent(MotionEvent event) {
         switch (event.getAction()){
             case MotionEvent.ACTION_DOWN:
+                Camera.Parameters parameters = mCamera.getParameters();
+                parameters.setFocusMode(Camera.Parameters.FOCUS_MODE_AUTO);
+                mCamera.setParameters(parameters);
+                mCamera.autoFocus(autoFocusCallback);
                 break;
         }
-        return super.onTouchEvent(event);
+        return true;
     }
 }
