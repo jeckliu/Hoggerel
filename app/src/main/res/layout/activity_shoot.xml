@@ -50,7 +50,7 @@
                 android:layout_marginLeft="60dp"
                 android:src="@mipmap/arrows_down_white" />
 
-            <com.jeckliu.mediarecorder.view.ShootIconView
+            <com.jeckliu.hoggerel.view.ShootIconView
                 android:id="@+id/activity_shoot_shooting_start"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"

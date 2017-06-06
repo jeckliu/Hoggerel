@@ -5,7 +5,7 @@ android {
     buildToolsVersion "25.0.3"
 
     defaultConfig {
-        applicationId "com.jeckliu.mediarecorder"
+        applicationId "com.jeckliu.hoggerel"
 //        multiDexEnabled true
         minSdkVersion 18
         targetSdkVersion 25

@@ -44,7 +44,7 @@
             android:layout_marginLeft="60dp"
             android:src="@mipmap/arrows_down_white" />
 
-        <com.jeckliu.mediarecorder.view.ShootIconView
+        <com.jeckliu.hoggerel.view.ShootIconView
             android:id="@+id/shoot_icon_view"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
