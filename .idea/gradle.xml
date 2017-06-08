@@ -8,7 +8,10 @@
         <option name="modules">
           <set>
             <option value="$PROJECT_DIR$" />
-            <option value="$PROJECT_DIR$/app" />
+            <option value="$PROJECT_DIR$/appframwork" />
+            <option value="$PROJECT_DIR$/codescanner" />
+            <option value="$PROJECT_DIR$/hoggerel" />
+            <option value="$PROJECT_DIR$/multimedia" />
           </set>
         </option>
         <option name="resolveModulePerSourceSet" value="false" />

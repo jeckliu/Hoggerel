@@ -3,7 +3,10 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/Hoggerel.iml" filepath="$PROJECT_DIR$/Hoggerel.iml" />
-      <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/appframwork/appframwork.iml" filepath="$PROJECT_DIR$/appframwork/appframwork.iml" />
+      <module fileurl="file://$PROJECT_DIR$/codescanner/codescanner.iml" filepath="$PROJECT_DIR$/codescanner/codescanner.iml" />
+      <module fileurl="file://$PROJECT_DIR$/hoggerel/hoggerel.iml" filepath="$PROJECT_DIR$/hoggerel/hoggerel.iml" />
+      <module fileurl="file://$PROJECT_DIR$/multimedia/multimedia.iml" filepath="$PROJECT_DIR$/multimedia/multimedia.iml" />
     </modules>
   </component>
 </project>
