@@ -162,6 +162,7 @@ public class CaptureZBarActivity extends BaseActivity {
                                 Intent intent = new Intent(getBaseContext(), BaseWebActivity.class);
                                 intent.putExtra(BaseWebActivity.URL, sym.getData());
                                 startActivity(intent);
+                                finish();
                             } else {
                                 viewfinderView.cancelScan();
                                 llFloatingMsg.setVisibility(View.VISIBLE);

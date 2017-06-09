@@ -16,6 +16,11 @@ public class CommonTitleBar implements View.OnClickListener{
     private ImageView ivBack;
     private String strTitle;
 
+    public CommonTitleBar(Activity activity){
+        this.activity = activity;
+        init();
+    }
+
     public CommonTitleBar(Activity activity, String title){
         this.activity = activity;
         this.strTitle = title;
@@ -27,6 +32,10 @@ public class CommonTitleBar implements View.OnClickListener{
         tvTitle = (TextView) activity.findViewById(R.id.common_title_bar_title);
         tvTitle.setText(strTitle);
         ivBack.setOnClickListener(this);
+    }
+
+    public void setTiile(String strTitle){
+        tvTitle.setText(strTitle);
     }
 
     @Override
