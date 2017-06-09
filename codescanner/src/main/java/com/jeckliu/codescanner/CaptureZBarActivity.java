@@ -159,8 +159,8 @@ public class CaptureZBarActivity extends BaseActivity {
                         SymbolSet syms = scanner.getResults();
                         for (Symbol sym : syms) {
                             if (!TextUtils.isEmpty(sym.getData())) {
-                                Intent intent = new Intent(getBaseContext(), BaseWebActivity.class);
-                                intent.putExtra(BaseWebActivity.URL, sym.getData());
+                                Intent intent = new Intent(getBaseContext(), ScanResultActivity.class);
+                                intent.putExtra(ScanResultActivity.PARAM_CONTEXT, sym.getData());
                                 startActivity(intent);
                                 finish();
                             } else {
