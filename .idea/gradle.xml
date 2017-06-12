@@ -12,6 +12,7 @@
             <option value="$PROJECT_DIR$/codescanner" />
             <option value="$PROJECT_DIR$/hoggerel" />
             <option value="$PROJECT_DIR$/multimedia" />
+            <option value="$PROJECT_DIR$/push" />
           </set>
         </option>
         <option name="resolveModulePerSourceSet" value="false" />

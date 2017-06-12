@@ -1,1 +1,1 @@
-include ':hoggerel', ':multimedia', ':appframwork', ':codescanner'
+include ':hoggerel', ':multimedia', ':appframwork', ':codescanner', ':push'

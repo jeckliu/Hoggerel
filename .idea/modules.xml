@@ -7,6 +7,7 @@
       <module fileurl="file://$PROJECT_DIR$/codescanner/codescanner.iml" filepath="$PROJECT_DIR$/codescanner/codescanner.iml" />
       <module fileurl="file://$PROJECT_DIR$/hoggerel/hoggerel.iml" filepath="$PROJECT_DIR$/hoggerel/hoggerel.iml" />
       <module fileurl="file://$PROJECT_DIR$/multimedia/multimedia.iml" filepath="$PROJECT_DIR$/multimedia/multimedia.iml" />
+      <module fileurl="file://$PROJECT_DIR$/push/push.iml" filepath="$PROJECT_DIR$/push/push.iml" />
     </modules>
   </component>
 </project>
