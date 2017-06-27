@@ -10,4 +10,7 @@
 
     <dimen name="main_tab_text_size">15sp</dimen>
     <dimen name="title_bar_text_size">20sp</dimen>
+    <dimen name="text_size_big">25sp</dimen>
+    <dimen name="text_size_mid">20sp</dimen>
+    <dimen name="text_size_small">15sp</dimen>
 </resources>

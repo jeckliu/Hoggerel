@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:background="@color/bgColor"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <include layout="@layout/common_title_bar"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/item_height"
+        android:text="支付宝支付(沙箱模式)"
+        android:layout_marginTop="5dp"
+        android:textSize="@dimen/text_size_mid"
+        android:onClick="onAlipay"
+        android:gravity="center"
+        android:background="@color/white"/>
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="测试账号：lkcibl5113@sandbox.com \n 登录密码：111111 \n 支付密码：111111"
+        android:layout_marginTop="5dp"
+        android:textSize="@dimen/text_size_small"
+        android:textColor="@color/gray"
+        android:gravity="center"
+        android:background="@color/white"/>
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/item_height"
+        android:text="微信支付"
+        android:layout_marginTop="5dp"
+        android:textSize="@dimen/text_size_mid"
+        android:onClick="onWxpay"
+        android:gravity="center"
+        android:background="@color/white"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/item_height"
+        android:text="检查是否支持微信支付"
+        android:layout_marginTop="5dp"
+        android:textSize="@dimen/text_size_mid"
+        android:onClick="onCheckWxpay"
+        android:gravity="center"
+        android:background="@color/white"/>
+
+
+
+</LinearLayout>

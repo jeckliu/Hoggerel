@@ -38,4 +38,5 @@ dependencies {
     compile project(path: ':multimedia')
     compile project(path: ':codescanner')
     compile project(path: ':push')
+    compile project(path: ':pay')
 }

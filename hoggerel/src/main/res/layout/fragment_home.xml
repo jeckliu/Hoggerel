@@ -31,4 +31,15 @@
         android:gravity="center"
         android:text="@string/multimedia" />
 
+    <TextView
+        android:id="@+id/fragment_home_pay"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_marginTop="5dp"
+        android:background="@color/white"
+        android:enabled="true"
+        android:gravity="center"
+        android:text="@string/pay" />
+
+
 </LinearLayout>
