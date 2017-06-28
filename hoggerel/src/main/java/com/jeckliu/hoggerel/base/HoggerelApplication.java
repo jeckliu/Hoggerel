@@ -1,7 +1,7 @@
 package com.jeckliu.hoggerel.base;
 
 import com.jeckliu.framwork.base.BaseApplication;
-
+import com.jeckliu.im.IMHelper;
 import cn.jpush.android.api.JPushInterface;
 
 /***
@@ -15,5 +15,7 @@ public class HoggerelApplication extends BaseApplication{
         super.onCreate();
         JPushInterface.setDebugMode(true); 	// 设置开启日志,发布时请关闭日志
         JPushInterface.init(this);     		// 初始化 JPush
+
+        IMHelper.getInstance().init(); //初始化im
     }
 }

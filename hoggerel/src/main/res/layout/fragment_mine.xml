@@ -2,6 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/bgColor"
     android:orientation="vertical">
 
     <RelativeLayout
@@ -13,12 +14,50 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentEnd="true"
-            android:layout_marginEnd="@dimen/margin_right"
             android:layout_centerVertical="true"
+            android:layout_marginEnd="@dimen/margin_right"
             android:text="@string/setting"
             android:textColor="@color/white"
             android:textSize="@dimen/title_bar_text_size" />
 
+    </RelativeLayout>
+
+    <TextView
+        android:id="@+id/fragment_mine_login"
+        android:layout_width="100dp"
+        android:layout_height="50dp"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="50dp"
+        android:background="@color/common_theme"
+        android:gravity="center"
+        android:text="登录"
+        android:textColor="@color/white"
+        android:textSize="@dimen/text_size_big" />
+
+    <RelativeLayout
+        android:visibility="gone"
+        android:layout_marginTop="50dp"
+        android:id="@+id/fragment_mine_user"
+        android:layout_width="wrap_content"
+        android:layout_height="70dp"
+        android:layout_gravity="center_horizontal">
+
+        <ImageView
+            android:id="@+id/fragment_mine_user_head"
+            android:layout_width="70dp"
+            android:layout_height="match_parent"
+            android:src="@drawable/icon_head" />
+
+        <TextView
+            android:id="@+id/fragment_mine_user_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="10dp"
+            android:layout_toRightOf="@+id/fragment_mine_user_head"
+            android:text="用户名"
+            android:textColor="@color/common_theme"
+            android:textSize="@dimen/text_size_mid" />
     </RelativeLayout>
 
 </LinearLayout>

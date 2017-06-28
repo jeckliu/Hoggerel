@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/bgColor"
+    android:orientation="vertical">
+
+    <include layout="@layout/common_title_bar" />
+
+    <EditText
+        android:id="@+id/activity_login_user_name"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/item_height"
+        android:hint="请输入用户名" />
+
+    <EditText
+        android:id="@+id/activity_login_pwd"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/item_height"
+        android:hint="请输入密码" />
+
+    <TextView
+        android:id="@+id/activity_login_login"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/item_height"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginTop="50dp"
+        android:background="@color/common_theme"
+        android:gravity="center"
+        android:text="登录"
+        android:textColor="@color/white"
+        android:textSize="@dimen/text_size_mid" />
+    <TextView
+        android:id="@+id/activity_login_register"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/item_height"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginTop="50dp"
+        android:background="@color/common_theme"
+        android:gravity="center"
+        android:text="前往注册"
+        android:textColor="@color/white"
+        android:textSize="@dimen/text_size_mid" />
+
+</LinearLayout>

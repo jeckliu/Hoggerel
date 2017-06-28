@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">小绵羊</string>
+    <string name="network_error">网络错误</string>
+
 </resources>

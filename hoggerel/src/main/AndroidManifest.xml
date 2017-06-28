@@ -45,6 +45,11 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".mine.login.LoginActivity"/>
+        <activity android:name=".mine.register.RegisterActivity"/>
+
+
+
         <!-- User defined.  For test only  用户自定义的广播接收器-->
         <receiver
             android:name="com.jeckliu.hoggerel.push.PushReceiver"

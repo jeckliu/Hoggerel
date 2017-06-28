@@ -4,13 +4,23 @@ import android.Manifest;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.FragmentManager;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.TextView;
+
+import com.hyphenate.chat.EMClient;
 import com.jeckliu.framwork.base.BaseActivity;
+import com.jeckliu.framwork.base.Configure;
+import com.jeckliu.framwork.event.EventLoginSuccess;
 import com.jeckliu.framwork.permission.IPermission;
+import com.jeckliu.framwork.util.SpUtil;
 import com.jeckliu.framwork.view.DenyPermissionDialog;
 import com.jeckliu.hoggerel.home.HomeFragment;
 import com.jeckliu.hoggerel.mine.MineFragment;
+import com.jeckliu.im.IMHelper;
+
+import org.greenrobot.eventbus.EventBus;
+
 import java.util.List;
 
 /***
@@ -30,6 +40,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener{
         initView();
 
         initFragment();
+
     }
 
     private void initView() {
@@ -83,4 +94,5 @@ public class MainActivity extends BaseActivity implements View.OnClickListener{
                 break;
         }
     }
+
 }
