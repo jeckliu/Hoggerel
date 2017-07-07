@@ -2,7 +2,7 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:id="@+id/item_picture_seek_picker_helper"
-    android:visibility="gone"
+    android:visibility="invisible"
     android:gravity="bottom"
     android:layout_height="match_parent">
 

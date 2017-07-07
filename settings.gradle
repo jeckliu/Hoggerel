@@ -1,1 +1,8 @@
-include ':hoggerel', ':multimedia', ':appframwork', ':codescanner', ':push', ':pay', ':im'
+include ':hoggerel',
+        ':multimedia',
+        ':appframwork',
+        ':codescanner',
+        ':push',
+        ':pay',
+        ':im',
+        ':easeui'

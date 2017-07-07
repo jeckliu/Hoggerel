@@ -4,22 +4,15 @@ import android.Manifest;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.FragmentManager;
-import android.text.TextUtils;
 import android.view.View;
 import android.widget.TextView;
 
-import com.hyphenate.chat.EMClient;
 import com.jeckliu.framwork.base.BaseActivity;
-import com.jeckliu.framwork.base.Configure;
-import com.jeckliu.framwork.event.EventLoginSuccess;
 import com.jeckliu.framwork.permission.IPermission;
-import com.jeckliu.framwork.util.SpUtil;
 import com.jeckliu.framwork.view.DenyPermissionDialog;
 import com.jeckliu.hoggerel.home.HomeFragment;
 import com.jeckliu.hoggerel.mine.MineFragment;
-import com.jeckliu.im.IMHelper;
-
-import org.greenrobot.eventbus.EventBus;
+import com.jeckliu.im.ConversationListFragment;
 
 import java.util.List;
 
@@ -28,8 +21,10 @@ import java.util.List;
  */
 public class MainActivity extends BaseActivity implements View.OnClickListener{
     public static final String TAG_HOME_FRAGMENT = "tagHomeFragment";
+    public static final String TAG_CHAT_FRAGMENT = "tagChatFragment";
     public static final String TAG_MINE_FRAGMENT = "tagMineFragment";
     private HomeFragment homeFragment;
+    private ConversationListFragment chatFragment;
     private MineFragment mineFragment;
     private FragmentManager fragmentManager;
     @Override
@@ -58,19 +53,24 @@ public class MainActivity extends BaseActivity implements View.OnClickListener{
                 });
 
         TextView tvTabHome = (TextView) findViewById(R.id.activity_main_tab_home);
+        TextView tvChat = (TextView) findViewById(R.id.activity_main_tab_chat);
         TextView tvTabMine = (TextView) findViewById(R.id.activity_main_tab_mine);
 
         tvTabHome.setOnClickListener(this);
+        tvChat.setOnClickListener(this);
         tvTabMine.setOnClickListener(this);
     }
 
     private void initFragment() {
         homeFragment = new HomeFragment();
+        chatFragment = new ConversationListFragment();
         mineFragment = new MineFragment();
         fragmentManager = getSupportFragmentManager();
         fragmentManager.beginTransaction()
                 .add(R.id.activity_main_fragment_container,homeFragment,TAG_HOME_FRAGMENT)
+                .add(R.id.activity_main_fragment_container,chatFragment,TAG_CHAT_FRAGMENT)
                 .add(R.id.activity_main_fragment_container,mineFragment,TAG_MINE_FRAGMENT)
+                .hide(chatFragment)
                 .hide(mineFragment)
                 .show(homeFragment)
                 .commit();
@@ -83,6 +83,14 @@ public class MainActivity extends BaseActivity implements View.OnClickListener{
             case R.id.activity_main_tab_home:
                 fragmentManager.beginTransaction()
                         .show(homeFragment)
+                        .hide(chatFragment)
+                        .hide(mineFragment)
+                        .commit();
+                break;
+            case R.id.activity_main_tab_chat:
+                fragmentManager.beginTransaction()
+                        .show(chatFragment)
+                        .hide(homeFragment)
                         .hide(mineFragment)
                         .commit();
                 break;
@@ -90,6 +98,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener{
                 fragmentManager.beginTransaction()
                         .show(mineFragment)
                         .hide(homeFragment)
+                        .hide(chatFragment)
                         .commit();
                 break;
         }

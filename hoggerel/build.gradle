@@ -9,11 +9,31 @@ android {
         targetSdkVersion rootProject.ext.targetSdkVersion
         versionCode rootProject.ext.versionCode
         versionName rootProject.ext.versionName
+        applicationId "com.jeckliu.hoggerel"
+
     }
+
+    signingConfigs {
+        myConfigs {
+            storeFile file("./keyStore/hoggerel.jks")
+            storePassword "123456"
+            keyAlias "key0"
+            keyPassword "123456"
+            v1SigningEnabled true
+            v2SigningEnabled true
+        }
+    }
+
     buildTypes {
         release {
+            signingConfig signingConfigs.myConfigs
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+        debug {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            signingConfig signingConfigs.myConfigs
         }
     }
 
@@ -25,13 +45,19 @@ android {
             jni.srcDirs = []
         }
     }
+
+        lintOptions {
+        checkReleaseBuilds false
+        // Or, if you prefer, you can continue to check for errors in release builds,
+        // but continue the build even when errors are found:
+        abortOnError false
+    }
 }
 
 dependencies {
     compile fileTree(include: ['*.jar'], dir: 'libs')
     testCompile 'junit:junit:4.12'
-    compile 'com.android.support:appcompat-v7:25.3.1'
-    compile 'com.android.support:recyclerview-v7:25.3.1'
+    compile "com.android.support:appcompat-v7:$rootProject.libraryVersion"
     compile project(path: ':appframwork')
     compile project(path: ':multimedia')
     compile project(path: ':codescanner')

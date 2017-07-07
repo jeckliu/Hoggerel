@@ -16,6 +16,7 @@ import com.jeckliu.framwork.base.BaseFragment;
 import com.jeckliu.framwork.base.Configure;
 import com.jeckliu.framwork.event.EventLoginSuccess;
 import com.jeckliu.framwork.util.SpUtil;
+import com.jeckliu.framwork.view.ToastShow;
 import com.jeckliu.hoggerel.R;
 import com.jeckliu.hoggerel.mine.login.LoginActivity;
 import com.jeckliu.im.IMHelper;
@@ -33,6 +34,7 @@ public class MineFragment extends BaseFragment {
     private RelativeLayout rlUser;
     private ImageView ivUserHead;
     private TextView tvUserName;
+    private TextView tvSetting;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -53,6 +55,7 @@ public class MineFragment extends BaseFragment {
         rlUser = (RelativeLayout) view.findViewById(R.id.fragment_mine_user);
         ivUserHead = (ImageView) view.findViewById(R.id.fragment_mine_user_head);
         tvUserName = (TextView) view.findViewById(R.id.fragment_mine_user_name);
+        tvSetting = (TextView) view.findViewById(R.id.fragment_mine_setting);
         initLogin();
     }
 
@@ -63,6 +66,12 @@ public class MineFragment extends BaseFragment {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(getContext(), LoginActivity.class));
+            }
+        });
+        tvSetting.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ToastShow.showLongMessage("后续研发中....");
             }
         });
     }

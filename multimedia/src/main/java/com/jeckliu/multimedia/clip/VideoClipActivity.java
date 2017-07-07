@@ -16,11 +16,11 @@ import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.FragmentActivity;
 import android.view.View;
 import android.widget.ImageView;
-import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.VideoView;
 
 import com.jeckliu.framwork.view.LoadingDialog;
+import com.jeckliu.framwork.view.ToastShow;
 import com.jeckliu.multimedia.R;
 import com.jeckliu.multimedia.mp4parser.MediaController;
 import com.jeckliu.multimedia.util.FileUtils;
@@ -87,7 +87,7 @@ public class VideoClipActivity extends FragmentActivity implements View.OnClickL
         tvShowTotalTime = (TextView) findViewById(R.id.total_time);
         videoView = (VideoView) findViewById(R.id.video_view);
         tvShowProgress = (TextView) findViewById(R.id.show_progress);
-        pictureSeekPickerHelper = PictureSeekPickerHelper.getInstance(this);
+        pictureSeekPickerHelper = PictureSeekPickerHelper.getNewInstance(this);
         checkPermission();
     }
 
@@ -155,7 +155,7 @@ public class VideoClipActivity extends FragmentActivity implements View.OnClickL
     }
 
     private class VideoCompressorTask extends AsyncTask<Void, Void, Boolean> {
-
+        private String desPath = FileUtils.getOutputFile();
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
@@ -164,7 +164,7 @@ public class VideoClipActivity extends FragmentActivity implements View.OnClickL
 
         @Override
         protected Boolean doInBackground(Void... voids) {
-            return MediaController.getInstance().compressVideo(path, FileUtils.getOutputFile(), startPosition - 1, endPosition);
+            return MediaController.getInstance().compressVideo(path, desPath, startPosition - 1, endPosition);
         }
 
         @Override
@@ -172,6 +172,7 @@ public class VideoClipActivity extends FragmentActivity implements View.OnClickL
             super.onPostExecute(compressed);
             LoadingDialog.getInstance().dismiss();
             if (compressed) {
+                ToastShow.showLongMessage("查看路径："+desPath);
             }
         }
     }

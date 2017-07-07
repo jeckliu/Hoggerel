@@ -5,6 +5,7 @@
       <module fileurl="file://$PROJECT_DIR$/Hoggerel.iml" filepath="$PROJECT_DIR$/Hoggerel.iml" />
       <module fileurl="file://$PROJECT_DIR$/appframwork/appframwork.iml" filepath="$PROJECT_DIR$/appframwork/appframwork.iml" />
       <module fileurl="file://$PROJECT_DIR$/codescanner/codescanner.iml" filepath="$PROJECT_DIR$/codescanner/codescanner.iml" />
+      <module fileurl="file://$PROJECT_DIR$/easeui/easeui.iml" filepath="$PROJECT_DIR$/easeui/easeui.iml" />
       <module fileurl="file://$PROJECT_DIR$/hoggerel/hoggerel.iml" filepath="$PROJECT_DIR$/hoggerel/hoggerel.iml" />
       <module fileurl="file://$PROJECT_DIR$/im/im.iml" filepath="$PROJECT_DIR$/im/im.iml" />
       <module fileurl="file://$PROJECT_DIR$/multimedia/multimedia.iml" filepath="$PROJECT_DIR$/multimedia/multimedia.iml" />

@@ -13,6 +13,7 @@ import android.widget.ImageView;
 import android.widget.Toast;
 import android.widget.VideoView;
 
+import com.jeckliu.framwork.view.ToastShow;
 import com.jeckliu.multimedia.R;
 import com.jeckliu.multimedia.util.FileUtils;
 
@@ -41,7 +42,6 @@ public class ShootCompletedFragment extends Fragment implements View.OnClickList
             filePath = bundle.getString(ShootActivity.TAG_FILE_PATH);
             flag_photo_video = bundle.getInt(ShootActivity.TAG_PHOTO_VIDEO);
         }
-        Toast.makeText(getContext(),cameraFacing+"-" + videoDuration,Toast.LENGTH_SHORT).show();
     }
 
     @Nullable
@@ -72,6 +72,7 @@ public class ShootCompletedFragment extends Fragment implements View.OnClickList
             }
         });
 
+        ToastShow.showLongMessage("文件已被保存到:"+filePath);
         if(flag_photo_video == ShootActivity.FLAG_PHOTO){
             ivPhoto.setVisibility(View.VISIBLE);
             videoView.setVisibility(View.GONE);
@@ -89,6 +90,7 @@ public class ShootCompletedFragment extends Fragment implements View.OnClickList
         int i = v.getId();
         if (i == R.id.fragment_shoot_completed_resume) {
             FileUtils.deleteFile(filePath);
+            ToastShow.showLongMessage("文件删除");
             Fragment showFra = new ShootingFragment();
             Bundle bundle = new Bundle();
             bundle.putInt(ShootActivity.TAG_CAMERA_FACING_STATE, cameraFacing);
@@ -97,7 +99,6 @@ public class ShootCompletedFragment extends Fragment implements View.OnClickList
 
         } else if (i == R.id.fragment_shoot_completed_confirm) {
             getActivity().finish();
-
         }
     }
 

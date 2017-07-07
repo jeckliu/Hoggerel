@@ -18,7 +18,7 @@ public class FileUtils {
     public static final int MEDIA_TYPE_VIDEO = 2;
 
     public static String getOutputMediaFile(int type){
-        File mediaStorageDir = new File(Environment.getExternalStorageDirectory(), "com.jeckliu.media");
+        File mediaStorageDir = new File(Environment.getExternalStorageDirectory(), "com.jeckliu.hoggerel");
         if(!mediaStorageDir.exists()){
             mediaStorageDir.mkdirs();
         }
@@ -37,7 +37,7 @@ public class FileUtils {
 
     public static String getOutputFile(){
         File rootDirectory = Environment.getExternalStorageDirectory();
-        File videoDirectory = new File(rootDirectory,"com.liu.media");
+        File videoDirectory = new File(rootDirectory,"com.jeckliu.hoggerel");
         if(!videoDirectory.exists()){
             videoDirectory.mkdir();
         }

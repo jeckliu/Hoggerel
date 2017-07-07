@@ -27,6 +27,17 @@
             android:textSize="@dimen/main_tab_text_size" />
 
         <TextView
+            android:id="@+id/activity_main_tab_chat"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:drawableTop="@drawable/icon_chat"
+            android:gravity="center"
+            android:text="@string/chat"
+            android:textColor="@color/white"
+            android:textSize="@dimen/main_tab_text_size" />
+
+        <TextView
             android:id="@+id/activity_main_tab_mine"
             android:layout_width="0dp"
             android:layout_height="match_parent"

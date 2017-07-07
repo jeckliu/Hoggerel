@@ -43,10 +43,8 @@ public class PictureSeekPickerHelper {
     private float leftThumbInitialPosition;
     private float rightThumbInitialPosition;
 
-    public static PictureSeekPickerHelper getInstance(Activity mActivity) {
-        if (instance == null) {
-            instance = new PictureSeekPickerHelper(mActivity);
-        }
+    public static PictureSeekPickerHelper getNewInstance(Activity mActivity) {
+        instance = new PictureSeekPickerHelper(mActivity);
         return instance;
     }
 

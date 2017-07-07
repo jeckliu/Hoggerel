@@ -1,8 +1,10 @@
 <resources>
     <string name="app_name">小绵羊app</string>
     <string name="home">首页</string>
+    <string name="chat">聊天</string>
     <string name="mine">我的</string>
     <string name="setting">设置</string>
     <string name="multimedia">多媒体</string>
     <string name="pay">支付</string>
+    <string name="contacts">通讯录</string>
 </resources>

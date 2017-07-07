@@ -14,7 +14,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
-
+import com.jeckliu.framwork.view.ToastShow;
 import com.jeckliu.multimedia.R;
 import com.jeckliu.multimedia.util.FileUtils;
 import com.jeckliu.multimedia.view.ShootIconView;
@@ -65,7 +65,10 @@ public class ShootingFragment extends Fragment implements ShootIconView.OnCallba
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        initCamera();
+        if(!openCamera()){
+            ToastShow.showLongMessage("相机权限未开启,请前往设置页面");
+            getActivity().finish();
+        }
         cameraPreview = new CameraPreview(getContext(), camera,cameraFacing);
         preview.addView(cameraPreview);
         shootIconView.setOnCallbackListener(this);
@@ -94,11 +97,11 @@ public class ShootingFragment extends Fragment implements ShootIconView.OnCallba
         });
     }
 
-    private void initCamera() {
+    private boolean openCamera() {
         try {
             camera = Camera.open(cameraFacing);
         } catch (Exception e) {
-            //
+            return false;
         }
         int cameraNumbers = Camera.getNumberOfCameras();
         if (cameraNumbers >= 2) {
@@ -106,6 +109,7 @@ public class ShootingFragment extends Fragment implements ShootIconView.OnCallba
         } else {
             ivSwitchCamera.setVisibility(View.GONE);
         }
+        return true;
     }
 
     @Override
@@ -121,6 +125,11 @@ public class ShootingFragment extends Fragment implements ShootIconView.OnCallba
     @Override
     public void onStopRecordVideo(long duration) {
         stopRecorder();
+        shootIconView.reset();
+        if(duration < 2000){
+            ToastShow.showLongMessage("视频低于2秒，暂不支持噢");
+            return;
+        }
         Fragment showFra = new ShootCompletedFragment();
         Bundle bundle = new Bundle();
         bundle.putLong(ShootActivity.TAG_SHOOT_TIME, duration);
@@ -129,7 +138,6 @@ public class ShootingFragment extends Fragment implements ShootIconView.OnCallba
         bundle.putInt(ShootActivity.TAG_PHOTO_VIDEO,ShootActivity.FLAG_VIDEO);
         showFra.setArguments(bundle);
         manager.beginTransaction().replace(R.id.fragment, showFra).commit();
-        shootIconView.reset();
     }
 
     private void startRecorder(){

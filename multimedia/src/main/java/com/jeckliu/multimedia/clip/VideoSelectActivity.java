@@ -74,6 +74,11 @@ public class VideoSelectActivity extends BaseActivity {
             if (!isError) {
                 LoadingDialog.getInstance().dismiss();
                 adapter.setData(videoBeanList);
+                if(videoBeanList.size()== 0){
+                   ToastShow.showLongMessage("没有视频资源");
+                }
+            }else {
+                ToastShow.showLongMessage("加载出错！");
             }
         }
     }

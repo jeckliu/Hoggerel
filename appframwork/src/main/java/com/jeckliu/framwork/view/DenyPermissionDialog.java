@@ -58,6 +58,12 @@ public class DenyPermissionDialog {
             if (permission.equals(Manifest.permission.RECORD_AUDIO)) {
                 builder.append("麦克风、");
             }
+            if(permission.equals(Manifest.permission.ACCESS_FINE_LOCATION)){
+                builder.append("GPS定位");
+            }
+            if(permission.equals(Manifest.permission.ACCESS_COARSE_LOCATION)){
+                builder.append("网络定位");
+            }
         }
         String result = builder.toString().substring(0, builder.lastIndexOf("、"));
         return "未授予" + result + "权限，请在系统设置页授予" + activity.getResources().getString(R.string.app_name) + result + "权限";
